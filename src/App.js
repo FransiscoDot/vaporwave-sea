@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 
 import Header from "./commons/Header";
+import Navigation from "./commons/Navigation";
 import Banner from "./commons/Banner";
 
 const Main = styled.div`
@@ -25,6 +26,7 @@ class App extends Component {
       <Main>
         <Header />
         <Body>
+          <Navigation />
           <Banner />
         </Body>
       </Main>
