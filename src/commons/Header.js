@@ -7,8 +7,8 @@ const Head = styled.div`
 `;
 
 const Title = styled.div`
-  fontSize: 25;
-  margin: 10;
+  font-size: 2rem;
+  margin: 10px;
 `;
 
 const Header = () => {
