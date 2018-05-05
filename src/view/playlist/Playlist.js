@@ -1,76 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import { connect } from 'react-redux';
 
+import * as playlistActions from "../../actions/playlistActions";
 import Song from "./Song";
 
-const mockData = [
-  {
-    title: "Machintosh plus",
-    duration: "3.56",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Tassoni",
-    duration: "5.02",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Lemonade",
-    duration: "3.62",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Machintosh plus",
-    duration: "3.56",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Tassoni",
-    duration: "5.02",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Lemonade",
-    duration: "3.62",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Machintosh plus",
-    duration: "3.56",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Tassoni",
-    duration: "5.02",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Lemonade",
-    duration: "3.62",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Machintosh plus",
-    duration: "3.56",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Tassoni",
-    duration: "5.02",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  },
-  {
-    title: "Lemonade",
-    duration: "3.62",
-    image: "http://d310a9hpolx59w.cloudfront.net/product_photos/42681840/print_original.jpg"
-  }
-];
-
 class Playlist extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(playlistActions.fetchSongs());
+  }
+
   render() {
+    const { songs } = this.props;
+
     return (
       <div>
         {
-          mockData.map((s, i) => (
+          songs.map((s, i) => (
             <Song
               key={i}
               title={s.title}
@@ -84,4 +31,14 @@ class Playlist extends Component {
   }
 };
 
-export default Playlist;
+Playlist.propTypes = {
+  songs: PropTypes.array.isRequired
+}
+
+function mapStateToProps(store) {
+  return {
+    songs: store.songs
+  }
+}
+
+export default connect(mapStateToProps)(Playlist);
