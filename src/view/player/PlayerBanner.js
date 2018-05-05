@@ -33,4 +33,4 @@ const Div = styled.div`
   height: 50px;
 `;
 
-export default connect()(PlayerBanner);
+export default connect(mapStateToProps)(PlayerBanner);
