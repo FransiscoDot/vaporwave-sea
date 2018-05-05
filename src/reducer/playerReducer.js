@@ -8,5 +8,5 @@ export default function song(state = initialState.song, action) {
 
     default:
       return state;
-  };
+  }
 }

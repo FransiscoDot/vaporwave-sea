@@ -3,18 +3,29 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
+import SongDetail from './SongDetail';
+import AudioPlayer from './Player';
+
 class PlayerBanner extends Component {
   render() {
     const { song } = this.props;
 
     return (
-      <Div>
+      <div>
         {
           song && (
-            <p>{song.title}</p>
+            <Div>
+              <SongDetail
+                {...song}
+              />
+              <AudioPlayer
+                duration={song.duration}
+                isRun={true}/>
+              <div style={{width: 400}}/>
+            </Div>
           )
         }
-      </Div>
+      </div>
     )
   }
 };
@@ -30,7 +41,10 @@ function mapStateToProps(store) {
 }
 
 const Div = styled.div`
-  height: 50px;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default connect(mapStateToProps)(PlayerBanner);

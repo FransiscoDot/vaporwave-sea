@@ -39,8 +39,7 @@ const Body = styled.div`
 `;
 
 const Footer = styled.div`
-  display: flex;
-  flex-direction: row;
+  margin: 10px;
 `;
 
 export default App;

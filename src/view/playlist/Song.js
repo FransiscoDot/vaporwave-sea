@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Song = ({title, duration, image}) => {
+const Song = ({song, playSong}) => {
+  const { image, title, duration } = song;
+
   return (
     <Container>
       <ImgContainer>
         <Img src={image}/>
-        <Play src="https://png.icons8.com/ios/50/000000/play-button-circled-filled.png" />
+        <Play
+          onClick={() => playSong(song)}
+          src="https://png.icons8.com/ios/50/000000/play-button-circled-filled.png" />
       </ImgContainer>
       <TextContainer>
         <Title>{title}</Title>

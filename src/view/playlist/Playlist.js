@@ -11,6 +11,10 @@ class Playlist extends Component {
     this.props.dispatch(playlistActions.fetchSongs());
   }
 
+  playSong = song => {
+    this.props.dispatch(playlistActions.playSong(song));
+  }
+
   render() {
     const { songs } = this.props;
 
@@ -20,9 +24,8 @@ class Playlist extends Component {
           songs.map((s, i) => (
             <Song
               key={i}
-              title={s.title}
-              duration={s.duration}
-              image={s.image}
+              song={s}
+              playSong={this.playSong}
             />
           ))
         }
