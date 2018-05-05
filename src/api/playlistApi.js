@@ -68,7 +68,7 @@ export default class PlaylistApi {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(data);
-      }, 1000);
+      }, delay);
     });
   };
 }
