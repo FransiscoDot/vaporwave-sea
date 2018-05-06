@@ -26,7 +26,7 @@ const AudioPlayer = ({audioPlayer, onClick, onPlaying, onChangeSlider, onBeforeC
         max={duration}
         onChange={onChangeSlider}
         onBeforeChange={onBeforeChangeSlider}
-        onAfterChange={() => onAfterChangeSlider(song)}
+        onAfterChange={onAfterChangeSlider}
       />
       <Sound
         url={url}

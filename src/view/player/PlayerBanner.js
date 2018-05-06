@@ -14,6 +14,10 @@ class PlayerBanner extends Component {
     this.props.dispatch(playlistActions.playSong(song));
   }
 
+  resumeSong = () => {
+    this.props.dispatch(playlistActions.resumeSong());
+  }
+
   pauseSong = () => {
     this.props.dispatch(playlistActions.pauseSong());
   }
@@ -24,7 +28,7 @@ class PlayerBanner extends Component {
       : this.playSong
   }
 
-  onVolumeChangeComplete = volume => {
+  onVolumeChange = volume => {
     this.props.dispatch(playlistActions.volumeChange(volume));
   }
 
@@ -34,14 +38,6 @@ class PlayerBanner extends Component {
 
   onPositionChangeFromSlider = newPosition => {
     this.props.dispatch(playlistActions.positionChangedFromSlider(newPosition));
-  }
-
-  beforeChangeSongPosition = () => {
-    this.pauseSong();
-  }
-
-  afterChangeSongPosition = song => {
-    this.playSong(song);
   }
 
   render() {
@@ -63,12 +59,14 @@ class PlayerBanner extends Component {
                 }
                 onPlaying={this.onPlaying}
                 onChangeSlider={this.onPositionChangeFromSlider}
-                onBeforeChangeSlider={this.beforeChangeSongPosition}
-                onAfterChangeSlider={this.afterChangeSongPosition}
+                onBeforeChangeSlider={this.pauseSong}
+                onAfterChangeSlider={this.resumeSong}
               />
               <VolumeBanner
                 volume={volume}
-                onVolumeChangeComplete={this.onVolumeChangeComplete}
+                beforeChangeVolume={this.pauseSong}
+                onVolumeChange={this.onVolumeChange}
+                afterChangeVolume={this.resumeSong}
               />
             </Div>
           )

@@ -10,6 +10,12 @@ export default function audioPlayer(state = initialState.audioPlayer, action) {
         status: "PLAYING"
       };
 
+    case types.RESUME_SONG:
+      return {
+        ...state,
+        status: "PLAYING"
+      };
+
     case types.CHANGE_SONG:
       return {
         ...state,

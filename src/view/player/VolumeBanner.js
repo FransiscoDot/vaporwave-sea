@@ -1,22 +1,26 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Slider from "rc-slider";
 
-const VolumeBanner = ({volume, onVolumeChangeComplete}) => {
+const VolumeBanner = ({volume, beforeChangeVolume, onVolumeChange, afterChangeVolume}) => {
   return (
     <Container>
-      {/* <SliderWrapper
-        value={volume}
+      <Slider
+        min={0}
         max={100}
-        handleChangeComplete={onVolumeChangeComplete}
-      /> */}
+        value={volume}
+        onBeforeChange={beforeChangeVolume}
+        onChange={onVolumeChange}
+        onAfterChange={afterChangeVolume}
+      />
     </Container>
   );
 }
 
 VolumeBanner.propTypes = {
   volume: PropTypes.number.isRequired,
-  onVolumeChangeComplete: PropTypes.func.isRequired
+  onVolumeChange: PropTypes.func.isRequired
 };
 
 const Container = styled.div`
