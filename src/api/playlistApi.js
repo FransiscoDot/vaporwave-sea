@@ -77,7 +77,7 @@ const data = [
 
 export default class PlaylistApi {
   static getSongs() {
-    return new Promise(resolve => {
+    return new Promise(async resolve => {
       setTimeout(() => {
         resolve(data);
       }, delay);

@@ -15,9 +15,38 @@ export function playSong(song) {
   };
 }
 
+export function changeSong(song) {
+  return {
+    type: types.CHANGE_SONG,
+    song
+  }
+}
+
 export function pauseSong() {
   return {
     type: types.PAUSE_SONG
+  }
+}
+
+export function volumeChange(volume) {
+  return {
+    type: types.VOLUME_CHANGE,
+    volume
+  }
+}
+
+export function positionChanged(position, duration) {
+  return {
+    type: types.POSITION_CHANGED,
+    position,
+    duration
+  }
+}
+
+export function positionChangedFromSlider(position) {
+  return {
+    type: types.POSITION_CHANGED_FROM_SLIDER,
+    position
   }
 }
 

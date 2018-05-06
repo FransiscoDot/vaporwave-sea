@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Slider from "rc-slider";
-import 'rc-slider/assets/index.css';
 import Sound from "react-sound";
+import Slider from 'rc-slider';
 
-const AudioPlayer = ({audioPlayer, onClick}) => {
-  const { duration, url } = audioPlayer.song;
-  const { status, song } = audioPlayer;
+const AudioPlayer = ({audioPlayer, onClick, onPlaying, onChangeSlider, onBeforeChangeSlider, onAfterChangeSlider}) => {
+  const { url } = audioPlayer.song;
+  const { status, song, volume, position, duration } = audioPlayer;
 
   return (
     <Div>
@@ -22,12 +21,19 @@ const AudioPlayer = ({audioPlayer, onClick}) => {
         />
       </ButtonsPanel>
       <Slider
+        value={position}
         min={0}
         max={duration}
+        onChange={onChangeSlider}
+        onBeforeChange={onBeforeChangeSlider}
+        onAfterChange={() => onAfterChangeSlider(song)}
       />
       <Sound
         url={url}
         playStatus={status}
+        volume={volume}
+        playFromPosition={position}
+        onPlaying={onPlaying}
       />
     </Div>
   );
@@ -35,7 +41,11 @@ const AudioPlayer = ({audioPlayer, onClick}) => {
 
 AudioPlayer.propTypes = {
   audioPlayer: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onPlaying: PropTypes.func.isRequired,
+  onChangeSlider: PropTypes.func.isRequired,
+  onBeforeChangeSlider: PropTypes.func.isRequired,
+  onAfterChangeSlider: PropTypes.func.isRequired
 };
 
 const ButtonsPanel = styled.div`

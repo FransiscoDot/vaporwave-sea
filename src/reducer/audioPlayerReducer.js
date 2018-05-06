@@ -10,10 +10,36 @@ export default function audioPlayer(state = initialState.audioPlayer, action) {
         status: "PLAYING"
       };
 
+    case types.CHANGE_SONG:
+      return {
+        ...state,
+        song: action.song,
+        position: 0
+      };
+
     case types.PAUSE_SONG:
       return {
         ...state,
-        status: "PAUSED"
+        status: "STOPPED"
+      };
+
+    case types.VOLUME_CHANGE:
+      return {
+        ...state,
+        volume: action.volume
+      };
+
+    case types.POSITION_CHANGED:
+      return {
+        ...state,
+        position: action.position,
+        duration: action.duration
+      };
+
+    case types.POSITION_CHANGED_FROM_SLIDER:
+      return {
+        ...state,
+        position: action.position
       };
 
     default:

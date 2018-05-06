@@ -6,12 +6,23 @@ import * as playlistActions from "../../actions/playlistActions";
 import Song from "./Song";
 
 class Playlist extends Component {
+  constructor(props) {
+    super(props);
+
+    this.playSong = this.playSong.bind(this);
+  }
+
   componentDidMount() {
     this.props.dispatch(playlistActions.fetchSongs());
   }
 
-  playSong = song => {
-    this.props.dispatch(playlistActions.playSong(song));
+  playSong = songSelected => {
+    const { song } = this.props.audioPlayer;
+
+    if (song && song.url !== songSelected.url)
+      this.props.dispatch(playlistActions.changeSong(songSelected));
+    else
+      this.props.dispatch(playlistActions.playSong(songSelected));
   }
 
   pauseSong = () => {

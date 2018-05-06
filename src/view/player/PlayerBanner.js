@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import 'rc-slider/assets/index.css';
 
 import SongDetail from './SongDetail';
-import AudioPlayer from './Player';
+import AudioPlayer from './AudioPlayer';
+import VolumeBanner from "./VolumeBanner";
 import * as playlistActions from "../../actions/playlistActions";
 
 class PlayerBanner extends Component {
@@ -12,8 +14,8 @@ class PlayerBanner extends Component {
     this.props.dispatch(playlistActions.playSong(song));
   }
 
-  pauseSong = song => {
-    this.props.dispatch(playlistActions.pauseSong(song));
+  pauseSong = () => {
+    this.props.dispatch(playlistActions.pauseSong());
   }
 
   switchAudioPlayerFunction = audioPlayer => {
@@ -22,9 +24,29 @@ class PlayerBanner extends Component {
       : this.playSong
   }
 
+  onVolumeChangeComplete = volume => {
+    this.props.dispatch(playlistActions.volumeChange(volume));
+  }
+
+  onPlaying = soundInfo => {
+    this.props.dispatch(playlistActions.positionChanged(soundInfo.position, soundInfo.duration));
+  }
+
+  onPositionChangeFromSlider = newPosition => {
+    this.props.dispatch(playlistActions.positionChangedFromSlider(newPosition));
+  }
+
+  beforeChangeSongPosition = () => {
+    this.pauseSong();
+  }
+
+  afterChangeSongPosition = song => {
+    this.playSong(song);
+  }
+
   render() {
     const { audioPlayer } = this.props;
-    const { song } = audioPlayer;
+    const { song, volume } = audioPlayer;
 
     return (
       <div>
@@ -39,8 +61,15 @@ class PlayerBanner extends Component {
                 onClick={
                   this.switchAudioPlayerFunction(audioPlayer)
                 }
+                onPlaying={this.onPlaying}
+                onChangeSlider={this.onPositionChangeFromSlider}
+                onBeforeChangeSlider={this.beforeChangeSongPosition}
+                onAfterChangeSlider={this.afterChangeSongPosition}
               />
-              <div style={{width: 400}}/>
+              <VolumeBanner
+                volume={volume}
+                onVolumeChangeComplete={this.onVolumeChangeComplete}
+              />
             </Div>
           )
         }

@@ -4,7 +4,8 @@ export default {
   audioPlayer: {
     song: null,
     status: "",
-    playFromPosition: 0,
-    volume: 100
+    volume: 100,
+    position: 0,
+    duration: 0
   }
 };
