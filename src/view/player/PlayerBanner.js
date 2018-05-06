@@ -36,6 +36,10 @@ class PlayerBanner extends Component {
     this.props.dispatch(playlistActions.positionChanged(soundInfo.position, soundInfo.duration));
   }
 
+  onFinishedPlaying= () => {
+    this.props.dispatch(playlistActions.clearAudioPlayer());
+  }
+
   onPositionChangeFromSlider = newPosition => {
     this.props.dispatch(playlistActions.positionChangedFromSlider(newPosition));
   }
@@ -61,6 +65,7 @@ class PlayerBanner extends Component {
                 onChangeSlider={this.onPositionChangeFromSlider}
                 onBeforeChangeSlider={this.pauseSong}
                 onAfterChangeSlider={this.resumeSong}
+                onFinishedPlaying={this.onFinishedPlaying}
               />
               <VolumeBanner
                 volume={volume}

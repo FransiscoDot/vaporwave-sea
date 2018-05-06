@@ -6,6 +6,13 @@ import Slider from "rc-slider";
 const VolumeBanner = ({volume, beforeChangeVolume, onVolumeChange, afterChangeVolume}) => {
   return (
     <Container>
+      <AudioIcon
+        src={
+          volume === 0
+            ? "https://png.icons8.com/ios/50/000000/no-audio-filled.png"
+            : "https://png.icons8.com/ios/50/000000/high-volume-filled.png"
+        }
+      />
       <Slider
         min={0}
         max={100}
@@ -24,7 +31,17 @@ VolumeBanner.propTypes = {
 };
 
 const Container = styled.div`
-  width: 100px;
+  margin-right: 12px;
+  width: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const AudioIcon = styled.img`
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: 0 10px;
 `;
 
 export default VolumeBanner;

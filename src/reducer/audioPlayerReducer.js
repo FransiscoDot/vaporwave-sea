@@ -48,6 +48,9 @@ export default function audioPlayer(state = initialState.audioPlayer, action) {
         position: action.position
       };
 
+    case types.CLEAR_AUDIO_PLAYER:
+      return Object.assign(initialState.audioPlayer);
+
     default:
       return state;
   }

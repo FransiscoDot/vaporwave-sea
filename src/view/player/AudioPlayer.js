@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Sound from "react-sound";
 import Slider from 'rc-slider';
 
-const AudioPlayer = ({audioPlayer, onClick, onPlaying, onChangeSlider, onBeforeChangeSlider, onAfterChangeSlider}) => {
+const AudioPlayer = ({audioPlayer, onClick, onPlaying, onChangeSlider, onBeforeChangeSlider, onAfterChangeSlider, onFinishedPlaying}) => {
   const { url } = audioPlayer.song;
   const { status, song, volume, position, duration } = audioPlayer;
 
@@ -34,6 +34,7 @@ const AudioPlayer = ({audioPlayer, onClick, onPlaying, onChangeSlider, onBeforeC
         volume={volume}
         playFromPosition={position}
         onPlaying={onPlaying}
+        onFinishedPlaying={onFinishedPlaying}
       />
     </Div>
   );
@@ -45,7 +46,8 @@ AudioPlayer.propTypes = {
   onPlaying: PropTypes.func.isRequired,
   onChangeSlider: PropTypes.func.isRequired,
   onBeforeChangeSlider: PropTypes.func.isRequired,
-  onAfterChangeSlider: PropTypes.func.isRequired
+  onAfterChangeSlider: PropTypes.func.isRequired,
+  onFinishedPlaying: PropTypes.func.isRequired
 };
 
 const ButtonsPanel = styled.div`

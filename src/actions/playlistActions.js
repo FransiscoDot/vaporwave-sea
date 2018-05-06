@@ -56,6 +56,12 @@ export function positionChangedFromSlider(position) {
   };
 }
 
+export function clearAudioPlayer() {
+  return {
+    type: types.CLEAR_AUDIO_PLAYER
+  }
+}
+
 export function fetchSongs() {
   return function(dispatch) {
     return PlaylistApi.getSongs().then(songs => {
