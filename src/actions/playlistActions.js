@@ -15,6 +15,12 @@ export function playSong(song) {
   };
 }
 
+export function pauseSong() {
+  return {
+    type: types.PAUSE_SONG
+  }
+}
+
 export function fetchSongs() {
   return function(dispatch) {
     return PlaylistApi.getSongs().then(songs => {

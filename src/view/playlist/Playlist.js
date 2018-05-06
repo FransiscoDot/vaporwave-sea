@@ -6,7 +6,6 @@ import * as playlistActions from "../../actions/playlistActions";
 import Song from "./Song";
 
 class Playlist extends Component {
-
   componentDidMount() {
     this.props.dispatch(playlistActions.fetchSongs());
   }
@@ -15,8 +14,30 @@ class Playlist extends Component {
     this.props.dispatch(playlistActions.playSong(song));
   }
 
+  pauseSong = () => {
+    this.props.dispatch(playlistActions.pauseSong());
+  }
+
+  switchAudioPlayerFunction = (song, audioPlayer) => {
+    if (audioPlayer.song === null)
+      return this.playSong;
+
+    return song.url === audioPlayer.song.url && audioPlayer.status === "PLAYING"
+      ? this.pauseSong
+      : this.playSong
+  }
+
+  songIsPlaying = (song, audioPlayer) => {
+    if (audioPlayer.song === null)
+      return false
+
+    return song.url === audioPlayer.song.url && audioPlayer.status === "PLAYING"
+      ? true
+      : false
+  }
+
   render() {
-    const { songs } = this.props;
+    const { songs, audioPlayer } = this.props;
 
     return (
       <div>
@@ -25,7 +46,12 @@ class Playlist extends Component {
             <Song
               key={i}
               song={s}
-              playSong={this.playSong}
+              isPlaying={
+                this.songIsPlaying(s, audioPlayer)
+              }
+              onClick={
+                this.switchAudioPlayerFunction(s, audioPlayer)
+              }
             />
           ))
         }
@@ -40,7 +66,8 @@ Playlist.propTypes = {
 
 function mapStateToProps(store) {
   return {
-    songs: store.songs
+    songs: store.songs,
+    audioPlayer: store.audioPlayer
   }
 }
 

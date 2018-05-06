@@ -5,10 +5,26 @@ import styled from "styled-components";
 
 import SongDetail from './SongDetail';
 import AudioPlayer from './Player';
+import * as playlistActions from "../../actions/playlistActions";
 
 class PlayerBanner extends Component {
+  playSong = song => {
+    this.props.dispatch(playlistActions.playSong(song));
+  }
+
+  pauseSong = song => {
+    this.props.dispatch(playlistActions.pauseSong(song));
+  }
+
+  switchAudioPlayerFunction = audioPlayer => {
+    return audioPlayer.status === "PLAYING"
+      ? this.pauseSong
+      : this.playSong
+  }
+
   render() {
-    const { song } = this.props;
+    const { audioPlayer } = this.props;
+    const { song } = audioPlayer;
 
     return (
       <div>
@@ -19,8 +35,11 @@ class PlayerBanner extends Component {
                 {...song}
               />
               <AudioPlayer
-                duration={song.duration}
-                isRun={true}/>
+                audioPlayer={audioPlayer}
+                onClick={
+                  this.switchAudioPlayerFunction(audioPlayer)
+                }
+              />
               <div style={{width: 400}}/>
             </Div>
           )
@@ -36,8 +55,8 @@ PlayerBanner.propTypes = {
 
 function mapStateToProps(store) {
   return {
-    song: store.song && store.song
-  }
+    audioPlayer: store.audioPlayer
+  };
 }
 
 const Div = styled.div`

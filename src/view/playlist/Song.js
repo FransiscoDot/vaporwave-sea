@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Song = ({song, playSong}) => {
+const Song = ({song, onClick, isPlaying}) => {
   const { image, title, duration } = song;
 
   return (
@@ -9,8 +10,13 @@ const Song = ({song, playSong}) => {
       <ImgContainer>
         <Img src={image}/>
         <Play
-          onClick={() => playSong(song)}
-          src="https://png.icons8.com/ios/50/000000/play-button-circled-filled.png" />
+          onClick={() => onClick(song)}
+          src={
+              isPlaying
+                ? "https://png.icons8.com/ios/50/000000/circled-pause-filled.png"
+                : "https://png.icons8.com/ios/50/000000/play-button-circled-filled.png"
+            }
+          />
       </ImgContainer>
       <TextContainer>
         <Title>{title}</Title>
@@ -18,6 +24,12 @@ const Song = ({song, playSong}) => {
       </TextContainer>
     </Container>
   )
+};
+
+Song.propTypes = {
+  song: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 const Container = styled.div`

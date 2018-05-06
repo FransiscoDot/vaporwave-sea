@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import songs from "./playlistReducer";
-import song from "./playerReducer";
+import audioPlayer from "./audioPlayerReducer";
 
 const rootReducer = combineReducers({
   songs,
-  song
+  audioPlayer
 });
 
 export default rootReducer;

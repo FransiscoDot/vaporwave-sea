@@ -1,4 +1,10 @@
 export default {
   songs: [],
-  song: null
+  song: null,
+  audioPlayer: {
+    song: null,
+    status: "",
+    playFromPosition: 0,
+    volume: 100
+  }
 };
