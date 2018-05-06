@@ -18,9 +18,9 @@ export default function audioPlayer(state = initialState.audioPlayer, action) {
 
     case types.CHANGE_SONG:
       return {
-        ...state,
+        ...initialState.audioPlayer,
         song: action.song,
-        position: 0
+        status: "PLAYING"
       };
 
     case types.PAUSE_SONG:

@@ -37,6 +37,10 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   margin: 10px 0;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImgContainer = styled.div`
