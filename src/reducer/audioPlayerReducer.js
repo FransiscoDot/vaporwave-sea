@@ -20,7 +20,8 @@ export default function audioPlayer(state = initialState.audioPlayer, action) {
       return {
         ...initialState.audioPlayer,
         song: action.song,
-        status: "PLAYING"
+        status: "PLAYING",
+        volume: state.volume
       };
 
     case types.PAUSE_SONG:
@@ -49,7 +50,10 @@ export default function audioPlayer(state = initialState.audioPlayer, action) {
       };
 
     case types.CLEAR_AUDIO_PLAYER:
-      return Object.assign(initialState.audioPlayer);
+      return {
+        ...initialState.audioPlayer,
+        volume: state.volume
+      }
 
     default:
       return state;
